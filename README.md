@@ -8,11 +8,9 @@ Tunnel
 # 系统部署架构
 ![部署架构](./document/tunnel架构.png)
 # 产品特性
-
-- 阶段一
-    - cluster-group-worker 三级架构模式，支持集群无限扩容
-    - master-slave高可用部署架构
-    - 基于zk的任务协调与恢复
+- cluster-group-worker 三级架构模式，支持集群无限扩容
+- master-slave高可用部署架构
+- 基于zk的任务协调与恢复
 
 
 
