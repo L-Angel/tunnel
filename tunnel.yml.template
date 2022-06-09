@@ -1,0 +1,48 @@
+# -- the configuration with aliyun sls log
+code: 'tunnel_1'
+aliyun_ak: ''
+aliyun_sk: ''
+aliyun_sls_endpoint: ''
+aliyun_sls_logstore: ''
+# -- config zk
+zk_addr: '127.0.0.1:2181'
+# zk session timeout : default 30s
+zk_timeout: 30
+db_name: 'tunnel'
+db_host: '127.0.0.1'
+db_port: 3600
+db_user: 'tunnel'
+db_password: 'tunnel'
+
+# -- cluster information
+
+cluster: 'demo_cluster'
+group: 'demo_group'
+
+
+# -- admin server information
+admin_server_host: '127.0.0.1:8081'
+
+task_load_type: 'local'
+
+# -- config mysql channels
+tasks:
+  - id: "task_1"
+    addr: 127.0.0.1
+    username: 'root'
+    password: 'rootxxxx'
+    port: 3306
+
+    # buffer size
+    flush_buffer_size: 100
+    # ms
+    flush_interval: 100
+
+    schemas:
+      - name: 'xxx_db'
+        tables:
+          - name: 'tunnel_demo'
+    sink:
+      type: 'file'
+      path: '/Users/xxx/.tunnel/data'
+
