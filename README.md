@@ -3,15 +3,17 @@ Tunnel
 基于binlog的数据同步组件
 ----
 
-# 功能诉求
+# 系统部署架构
+![部署架构](./document/tunnel架构.png)
+# 产品特性
 
 - 阶段一
     - 单节点Worker，其他worker backup
+    - 高可用部署架构
     - 基于zk的任务协调与恢复
     - 多mysql 实例监听
 
-- 阶段二
-    - 多worker分发
+
 
 # 注册中心节点设计
 
