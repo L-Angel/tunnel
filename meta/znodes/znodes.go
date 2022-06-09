@@ -25,7 +25,6 @@ func CreatePathWithDataIfNecessary(conn *zk.Conn, path string, ephemeral bool, d
 	for idx, s := range segs {
 		p += "/" + s
 		existed, _, _ := conn.Exists(p)
-
 		var err error
 		if !existed && idx == len(segs)-1 {
 			if ephemeral {

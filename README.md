@@ -7,10 +7,10 @@ Tunnel
 
 # 系统部署架构
 ![部署架构](./document/tunnel架构.png)
+
 # 产品特性
-- cluster-group-worker 三级架构模式，支持集群无限扩容
-- master-slave高可用部署架构
-- 基于zk的任务协调与恢复
+- 集群采用 cluster-group-worker 三级架构部署模式，支持集群无限扩容，以Group为最小管理单元，多机房，多实例灵活部署。
+- master-slave 高可用部署架构，基于zk等的分布式协调机制，任务失败Group自动转移，支持任务的高可用。
 
 
 
@@ -31,9 +31,15 @@ Tunnel
   |     |     |     |     |--Node Ip2
   |     |     |     |     |--Node Ip3
   |     |     |     |     
-  |     |     |     |--postion
-  |     |     |     |     |(byte data，mysql Position数据)
-  |     |     |
+  |     |     |     |--task
+  |     |     |     |     |
+  |     |     |     |     |-task_1
+  |     |     |     |     |     |--position
+  |     |     |     |     |          |(byte data，mysql Position数据)
+  |     |     |     |     |
+  |     |     |     |     |-task_2
+  |     |     |     |     |     |--position
+  |     |     |     |     |          |(byte data，mysql Position数据)
   |     |     |
 
 ```
