@@ -3,15 +3,16 @@ Tunnel
 基于binlog的数据同步组件
 ----
 
+# 产品介绍
+
 # 系统部署架构
 ![部署架构](./document/tunnel架构.png)
 # 产品特性
 
 - 阶段一
-    - 单节点Worker，其他worker backup
-    - 高可用部署架构
+    - cluster-group-worker 三级架构模式，支持集群无限扩容
+    - master-slave高可用部署架构
     - 基于zk的任务协调与恢复
-    - 多mysql 实例监听
 
 
 
