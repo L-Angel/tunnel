@@ -33,6 +33,7 @@ type Cfg struct {
 type CfgTask struct {
 	Id       string                 `yaml:"id"`
 	Addr     string                 `yaml:"addr"`
+	Enable   bool                   `yaml:"enable"`
 	Port     int                    `yaml:"port"`
 	Username string                 `yaml:"username"`
 	Password string                 `yaml:"password"`

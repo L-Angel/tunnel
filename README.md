@@ -9,7 +9,7 @@ Tunnel
 ![部署架构](./document/tunnel架构.png)
 
 # 产品特性
-- 集群采用 cluster-group-worker 三级架构部署模式，支持集群无限扩容，以Group为最小管理单元，多机房，多实例灵活部署。
+- 集群采用 cluster-group-worker 三级架构部署模式，支持集群无限扩容，以Group为最小运维管理单元，多机房、多实例灵活部署。
 - master-slave 高可用部署架构，基于zk等的分布式协调机制，任务失败Group自动转移，支持任务的高可用。
 
 

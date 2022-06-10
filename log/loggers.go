@@ -20,7 +20,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-package loggers
+package log
 
 // Standard is the interface used by Go's standard library's log package.
 type Standard interface {

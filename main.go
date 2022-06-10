@@ -2,17 +2,23 @@ package main
 
 import (
 	"github.com/l-angel/tunnel/bootstrap"
-	"time"
+	"runtime"
 )
 
 func main() {
+	runtime.GOMAXPROCS(runtime.NumCPU())
+
+	kill := make(chan bool, 1)
 	b := bootstrap.Bootstrap{}
 	b.Boot()
-	hold()
+	hold(kill)
 }
 
-func hold() {
+func hold(kill <-chan bool) {
 	for {
-		time.Sleep(1 * time.Hour)
+		select {
+		case <-kill:
+			runtime.Goexit()
+		}
 	}
 }

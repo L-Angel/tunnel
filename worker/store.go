@@ -13,7 +13,7 @@ type Store struct {
 }
 
 func newStore(taskId string, r registry.Registry) *Store {
-	s := &Store{r: r, node: strings.Join([]string{cfg.PRoot, cfg.C.Cluster, "task", taskId}, "/")}
+	s := &Store{r: r, node: "/" + strings.Join([]string{cfg.PRoot, cfg.C.Cluster, "task", taskId, "position"}, "/")}
 	_ = s.r.Create(s.node, false, nil)
 	return s
 }

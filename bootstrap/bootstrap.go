@@ -2,6 +2,7 @@ package bootstrap
 
 import (
 	_ "github.com/l-angel/tunnel/cfg"
+	"github.com/l-angel/tunnel/log"
 	"github.com/l-angel/tunnel/registry"
 
 	"github.com/l-angel/tunnel/bootstrap/cluster"
@@ -31,7 +32,7 @@ func (s *Bootstrap) Boot() {
 	s.loadWorker()
 	s.loadElection()
 
-	_ = s.electionService.Elect()
+	//_ = s.electionService.Elect()
 	s.c.Boot()
 }
 
@@ -51,6 +52,10 @@ func (s *Bootstrap) loadElection() {
 	s.electionSignal = make(chan bool, 1)
 	s.electionService = election.NewElection(s.electionSignal, s.r)
 	s.c = cluster.NewCluster(s.electionSignal, s.w)
+	err := s.electionService.Elect()
+	if err != nil {
+		log.Error(err)
+	}
 }
 
 func (s *Bootstrap) loadWorker() {

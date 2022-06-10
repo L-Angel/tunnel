@@ -114,7 +114,6 @@ func (t *Task) StartUp() error {
 		}
 		t.canalHandler = newHandler(t.id, t.tskCfg, t.sink, t.store)
 		t.canal.SetEventHandler(t.canalHandler)
-		//t.sink.Initialize()
 		t.canalHandler.startListener()
 		t.Run()
 	} else {

@@ -3,7 +3,6 @@ package log
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/l-angel/tunnel/log/loggers"
 	"os"
 	"runtime"
 	"strconv"
@@ -60,7 +59,7 @@ func (l Level) String() string {
 // Logger is the logger to record log
 type Logger struct {
 	// TODO: support logger.Contextual
-	loggers.Advanced
+	Advanced
 
 	level Level
 	flag  int
@@ -94,7 +93,7 @@ func NewDefault(handler Handler) *Logger {
 	return New(handler, Ltime|Lfile|Llevel)
 }
 
-func  newStdHandler() *StreamHandler {
+func newStdHandler() *StreamHandler {
 	h, _ := NewStreamHandler(os.Stdout)
 	return h
 }

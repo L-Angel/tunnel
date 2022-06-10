@@ -2,7 +2,6 @@ package election
 
 import (
 	"errors"
-	"fmt"
 	"github.com/l-angel/tunnel/cfg"
 	"github.com/l-angel/tunnel/log"
 	"github.com/l-angel/tunnel/meta/net"
@@ -30,7 +29,7 @@ type Election struct {
 func NewElection(_signal chan bool, r registry.Registry) *Election {
 	return &Election{
 		r:            r,
-		electionPath: strings.Join([]string{cfg.PRoot, cfg.C.Cluster, cfg.C.Group, "election"}, "/"),
+		electionPath: "/" + strings.Join([]string{cfg.PRoot, cfg.C.Cluster, cfg.C.Group, "election"}, "/"),
 		signal:       _signal,
 	}
 }
@@ -89,7 +88,9 @@ func (self *Election) startWatchConnectingState() {
 		if eventType == registry.Connected {
 			ip, _ := net.ExternalIP()
 			err := self.r.Create(strings.Join([]string{cfg.PRoot, cfg.C.Cluster, "_node", ip.String()}, "/"), true, nil)
-			fmt.Println(err)
+			if err != nil {
+				log.Error(err)
+			}
 			self.connectionAmount.Store(0)
 			if self.degraded.Load() {
 				_ = self.Elect()
