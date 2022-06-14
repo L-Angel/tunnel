@@ -148,7 +148,7 @@ func (t *Task) Initialize() {
 		pos := Position{}
 		d := t.store.get()
 		err := json.Unmarshal(d, &pos)
-		if err != nil {
+		if err == nil {
 			t.myPosition = NewPositionWithForce(pos.Name, pos.Pos)
 		}
 	}

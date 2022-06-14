@@ -4,13 +4,15 @@ import (
 	"bufio"
 	"encoding/json"
 	"fmt"
+	"github.com/l-angel/tunnel/log"
 	"os"
 	"strconv"
 	"time"
 )
 
 const (
-	defaultFileName = "data.seg"
+	defaultFileName   = "data"
+	defaultFileSuffix = ".seg"
 )
 
 type CfgFileSink struct {
@@ -45,25 +47,32 @@ func newFileSink(taskId string, c *CfgFileSink) *FileSink {
 
 func (self *FileSink) Initialize() {
 	self.check()
-	self.file, _ = os.OpenFile(self.path+"/"+self.name+"_"+self.taskId, os.O_APPEND|os.O_RDWR, 0666)
+	self.file, _ = os.OpenFile(self.path+"/"+self.name+"_"+self.taskId+defaultFileSuffix, os.O_APPEND|os.O_RDWR, 0666)
 }
 
 func (self *FileSink) check() {
 	if self.path == "" {
 		panic(fmt.Sprintf("Check sink file error, is empty!"))
 	}
-	_, err := os.Open(self.path + "/" + self.name)
+	_, err := os.Open(self.path + "/" + self.name + "_" + self.taskId + defaultFileSuffix)
 	if err != nil && os.IsNotExist(err) {
 		_ = os.MkdirAll(self.path, os.ModePerm)
-		_, _ = os.Create(self.path + "/" + self.name)
+		_, _ = os.Create(self.path + "/" + self.name + "_" + self.taskId + defaultFileSuffix)
 	}
 }
 
 func (self *FileSink) Sink(v interface{}) {
 	r, _ := json.Marshal(v)
 	w := bufio.NewWriter(self.file)
-	_, _ = w.WriteString(strconv.FormatInt(time.Now().UnixNano(), 10) + "|" + string(r) + "\n")
-	_ = w.Flush()
+	var err error
+	_, err = w.WriteString(strconv.FormatInt(time.Now().UnixNano(), 10) + "|" + string(r) + "\n")
+	if err != nil {
+		log.Error(err)
+	}
+	err = w.Flush()
+	if err != nil {
+		log.Error(err)
+	}
 }
 
 func (self *FileSink) Close() {

@@ -75,7 +75,7 @@ func (r *ZookeeperRegistry) SetData(path string, data []byte) error {
 		_, err := r.conn.Set(path, data, 0)
 		return err
 	} else {
-		_, err := r.conn.Set(path, data, stat.Version+1)
+		_, err := r.conn.Set(path, data, stat.Version)
 		return err
 	}
 }

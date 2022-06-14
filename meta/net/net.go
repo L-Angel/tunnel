@@ -46,8 +46,6 @@ func getIpFromAddr(addr net.Addr) net.IP {
 	ip = ip.To4()
 	if ip == nil {
 		return nil // not an ipv4 address
-
 	}
-
 	return ip
 }
